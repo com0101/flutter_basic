@@ -1,4 +1,11 @@
 import 'package:flutter/material.dart';
+import 'Product.dart';
+
+List<String> titles = <String>[
+  'Girl',
+  'Boy',
+  'Acc',
+];
 
 void main() {
   runApp(const MyApp());
@@ -64,44 +71,76 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin 
           centerTitle: true,
           toolbarHeight: 100,
           elevation: 0,
-          bottom: PreferredSize(
-            preferredSize: Size.fromHeight(40),
-            child: Material(
-              color: Colors.white,
-              child: TabBar(
+        ),
+        body: Column(children: [
+            // ListView.builder(
+            //   scrollDirection: Axis.horizontal,
+            //   itemCount: 25,
+            //   itemBuilder: (BuildContext context, int index) {
+            //     return ListTile(
+            //       tileColor: Colors.grey.shade800,
+            //       title: Text('${titles[0]} $index'),
+            //     );
+            //   },
+            // ),
+            PreferredSize(
+              preferredSize: Size.fromHeight(40),
+              child: Material(
+                color: Colors.white,
+                child: TabBar(
+                  controller: tabController,
+                  indicator: CircleTabIndicator(color: Colors.grey.shade800, radius: 5),
+                  indicatorSize: TabBarIndicatorSize.label,   
+                  tabs: const [
+                  Tab(text: '女裝'),
+                  Tab(text: '男裝'),
+                  Tab(text: '配件')
+                ]),
+              ) 
+            ),
+            Expanded(
+              child: TabBarView(
                 controller: tabController,
-                indicatorSize: TabBarIndicatorSize.label,   
-                tabs: [
-                Tab(text: '女裝'),
-                Tab(text: '男裝'),
-                Tab(text: '配件')
-              ]),
-            ) 
-          ),
-        ),
-        body: TabBarView(
-          controller: tabController,
-          children: [
-            Product(name: 'Girl'),
-            Product(name: 'Boy'),
-            Product(name: 'Acc'),
-          ],
-        ),
+                children: const [
+                  Product(name: 'Girl'),
+                  Product(name: 'Boy'),
+                  Product(name: 'Acc'),
+                ],
+              ),
+            )
+        ],)
       ),
     );
   }
 }
 
-class Product extends StatelessWidget {
-  const Product({
-    super.key, required this.name
-  });
+class CircleTabIndicator extends Decoration {
+  final Color color;
+  double radius;
 
-  final String name;
+  CircleTabIndicator({required this.color, required this.radius});
+
   @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Text(name),
-    );
+  BoxPainter createBoxPainter([VoidCallback? onChanged]){
+    return _CirclePainter(color:color, radius:radius);
   }
 }
+
+class _CirclePainter extends BoxPainter {
+
+  final double radius;
+  late Color color;
+  _CirclePainter({required this.color, required this.radius});
+
+  @override
+  void paint(Canvas canvas, Offset offset, ImageConfiguration cfg) {
+    late  Paint _paint;
+    _paint = Paint()..color = color;
+    _paint = _paint ..isAntiAlias = true;
+    final Offset circleOffset =
+        offset + Offset(cfg.size!.width / 2, cfg.size!.height - radius);
+    canvas.drawCircle(circleOffset, radius, _paint);
+  }
+}
+
+
