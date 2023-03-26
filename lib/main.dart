@@ -50,8 +50,8 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin 
 
   @override
   void initState() {
-    super.initState();
     tabController = TabController(length: 3, vsync: this);
+    super.initState();  
   }
 
   @override
@@ -86,38 +86,7 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin 
             ),
             body: Column(children: [
                 Expanded(
-                  child: Container(
-                    color: Colors.white,
-                    child: TabBarView(
-                      children: [
-                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),
-                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
-                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
-                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
-                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
-                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                       
-                      ],
-                    ),
-                    // child: ListView.builder(
-                    //   scrollDirection: Axis.horizontal,
-                    //   padding: const EdgeInsets.only(right: 16),
-                    //   itemCount: 25,
-                    //   itemBuilder: (BuildContext context, int index) {
-                    //     return Padding(
-                    //       padding: const EdgeInsets.only(left: 16),
-                    //       child: Card(
-                    //         clipBehavior: Clip.antiAliasWithSaveLayer,
-                    //         shape: RoundedRectangleBorder(
-                    //           borderRadius: BorderRadius.circular(16.0),
-                    //         ),
-                    //         child: Container(
-                    //           child: Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,)
-                    //         )
-                    //       ),
-                    //     );
-                    //   },
-                    // ),
-                  )
+                  child: SlideImage()
                 ),
                 PreferredSize(
                   preferredSize: Size.fromHeight(50),
@@ -128,8 +97,7 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin 
                       child: TabBar(
                         isScrollable: true,
                         controller: tabController,
-                        indicator: CircleTabIndicator(color: Colors.grey.shade800, radius: 5),
-                        indicatorSize: TabBarIndicatorSize.label,   
+                        indicator: CircleTabIndicator(color: Colors.grey.shade800, radius: 5),   
                         labelStyle: TextStyle(fontSize: 16.0),
                         tabs: const [
                         Tab(text: '女裝'),
@@ -156,6 +124,69 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin 
           );
         }
       ),
+    );
+  }
+}
+
+class SlideImage extends StatefulWidget {
+  const SlideImage({super.key});
+
+  @override
+  State<StatefulWidget> createState() => _SlideImage();
+}
+
+class _SlideImage extends State<SlideImage> with SingleTickerProviderStateMixin {
+  late TabController imageController;
+
+  @override
+  void initState() {
+    imageController = TabController(length: 6, vsync: this);
+    super.initState(); 
+  }
+
+   @override
+  void dispose() {
+    imageController.dispose();
+    super.dispose();
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return LayoutBuilder(
+      builder: (context, constraints) {
+        return Stack(children: [
+          Container(
+            color: Colors.white,
+            child: TabBarView(
+              controller: imageController,
+              children: [
+                Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),
+                Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                       
+              ],
+            ),
+          ),
+          Positioned(
+            bottom: 20,
+            left: 0,
+            right: 0,
+            height: 15,
+            child: Container(
+              height: 15,
+              alignment: Alignment.center,
+              child: TabPageSelector(
+                controller: imageController,
+                indicatorSize: 15,
+                selectedColor: Colors.white,              
+              ),
+            ),
+          ),
+        ], 
+        );
+      }
     );
   }
 }
