@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/services.dart';
 import 'Product.dart';
 
 List<String> titles = <String>[
@@ -62,53 +64,97 @@ class _MyHomePage extends State<MyHomePage> with SingleTickerProviderStateMixin 
   Widget build(BuildContext context) {
     return DefaultTabController (
       length: 3,
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: AppBar(
-          // Here we take the value from the MyHomePage object that was created by
-          // the App.build method, and use it to set our appbar title.
-          title: Image.asset('assets/images/Image_Logo.png', height: 38),
-          centerTitle: true,
-          toolbarHeight: 100,
-          elevation: 0,
-        ),
-        body: Column(children: [
-            // ListView.builder(
-            //   scrollDirection: Axis.horizontal,
-            //   itemCount: 25,
-            //   itemBuilder: (BuildContext context, int index) {
-            //     return ListTile(
-            //       tileColor: Colors.grey.shade800,
-            //       title: Text('${titles[0]} $index'),
-            //     );
-            //   },
-            // ),
-            PreferredSize(
-              preferredSize: Size.fromHeight(40),
-              child: Material(
-                color: Colors.white,
-                child: TabBar(
-                  controller: tabController,
-                  indicator: CircleTabIndicator(color: Colors.grey.shade800, radius: 5),
-                  indicatorSize: TabBarIndicatorSize.label,   
-                  tabs: const [
-                  Tab(text: '女裝'),
-                  Tab(text: '男裝'),
-                  Tab(text: '配件')
-                ]),
-              ) 
-            ),
-            Expanded(
-              child: TabBarView(
-                controller: tabController,
-                children: const [
-                  Product(name: 'Girl'),
-                  Product(name: 'Boy'),
-                  Product(name: 'Acc'),
-                ],
+      child: LayoutBuilder(
+        builder: (context, constraints) {
+          return Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              // Here we take the value from the MyHomePage object that was created by
+              // the App.build method, and use it to set our appbar title.
+              systemOverlayStyle: const SystemUiOverlayStyle(
+                // Status bar color
+                statusBarColor: Colors.white, 
+                // Status bar brightness
+                statusBarIconBrightness: Brightness.dark, // For Android (dark icons)
+
               ),
-            )
-        ],)
+              backgroundColor: Colors.white,
+              title: Image.asset('assets/images/Image_Logo.png', height: 38),
+              centerTitle: true,
+              toolbarHeight: 80,
+              elevation: 0,
+            ),
+            body: Column(children: [
+                Expanded(
+                  child: Container(
+                    color: Colors.white,
+                    child: TabBarView(
+                      children: [
+                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),
+                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                        
+                        Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,),                       
+                      ],
+                    ),
+                    // child: ListView.builder(
+                    //   scrollDirection: Axis.horizontal,
+                    //   padding: const EdgeInsets.only(right: 16),
+                    //   itemCount: 25,
+                    //   itemBuilder: (BuildContext context, int index) {
+                    //     return Padding(
+                    //       padding: const EdgeInsets.only(left: 16),
+                    //       child: Card(
+                    //         clipBehavior: Clip.antiAliasWithSaveLayer,
+                    //         shape: RoundedRectangleBorder(
+                    //           borderRadius: BorderRadius.circular(16.0),
+                    //         ),
+                    //         child: Container(
+                    //           child: Image.asset('assets/images/cloth_2.jpg', fit: BoxFit.cover, width: constraints.maxWidth,)
+                    //         )
+                    //       ),
+                    //     );
+                    //   },
+                    // ),
+                  )
+                ),
+                PreferredSize(
+                  preferredSize: Size.fromHeight(50),
+                  child: Material(
+                    color: Colors.white,
+                    child: Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: TabBar(
+                        isScrollable: true,
+                        controller: tabController,
+                        indicator: CircleTabIndicator(color: Colors.grey.shade800, radius: 5),
+                        indicatorSize: TabBarIndicatorSize.label,   
+                        labelStyle: TextStyle(fontSize: 16.0),
+                        tabs: const [
+                        Tab(text: '女裝'),
+                        Tab(text: '男裝'),
+                        Tab(text: '配件')
+                      ]),
+                    )
+                  ) 
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.only(left: 8, right: 8),
+                    child: TabBarView(
+                      controller: tabController,
+                      children: const [
+                        Product(name: 'Girl'),
+                        Product(name: 'Boy'),
+                        Product(name: 'Acc'),
+                      ],
+                    ),
+                  ) 
+                )
+            ],)
+          );
+        }
       ),
     );
   }
@@ -142,5 +188,4 @@ class _CirclePainter extends BoxPainter {
     canvas.drawCircle(circleOffset, radius, _paint);
   }
 }
-
 
