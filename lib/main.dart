@@ -106,16 +106,16 @@ class _MyHomePage extends State<MyHomePage>
                             ]),
                       ))),
               Expanded(
-                  child: Padding(
-                padding: const EdgeInsets.only(left: 8, right: 8),
-                child: TabBarView(
-                  controller: tabController,
-                  children: const [
-                    Product(name: 'Girl'),
-                    Product(name: 'Boy'),
-                    Product(name: 'Acc'),
-                  ],
-                ),
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 8, right: 8),
+                  child: TabBarView(
+                    controller: tabController,
+                    children: const [
+                      Product(name: 'Girl'),
+                      Product(name: 'Boy'),
+                      Product(name: 'Acc'),
+                    ],
+                  ),
               ))
             ],
           ));
