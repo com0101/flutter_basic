@@ -73,6 +73,7 @@ class _DetailMainImage extends State<DetailMainImage>
               'assets/images/cloth_1.jpg',
               fit: BoxFit.cover,
               width: constraints.maxWidth,
+              height: constraints.maxWidth >= 850 ? constraints.maxHeight : constraints.maxHeight/2,
             ),
           ),
           Positioned(
@@ -93,6 +94,21 @@ class _DetailMainImage extends State<DetailMainImage>
                   overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
                     if (states.contains(MaterialState.pressed)) return Colors.white10; // <-- Splash color
                   }),
+                ),
+              )
+            ),
+          ),
+          Positioned(
+            top: constraints.maxWidth >= 850 ? 80 : constraints.maxHeight/3,
+            left: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : 0,
+            right: constraints.maxWidth >= 850 ? 50 : 0,
+            child: Container(
+              height: constraints.maxHeight,
+              child: Card(
+                margin: EdgeInsets.zero,
+                elevation: 10,
+                shape:const RoundedRectangleBorder(
+                  borderRadius: BorderRadius.only(topLeft: Radius.circular(20), topRight: Radius.circular(20)),
                 ),
               )
             ),
