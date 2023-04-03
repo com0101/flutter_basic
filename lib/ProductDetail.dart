@@ -29,10 +29,12 @@ class _ProductDetail extends State<ProductDetail> {
           backgroundColor: Colors.white,
           extendBodyBehindAppBar: true,
           appBar: AppBar(
+            toolbarHeight: 80,
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: Container(
-                padding: const EdgeInsets.only(top: 20, left: 20),
+                margin: EdgeInsets.only(top: 30),
+                // padding: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
                   onPressed: () {
@@ -40,7 +42,6 @@ class _ProductDetail extends State<ProductDetail> {
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(CircleBorder()),
-                    padding: MaterialStateProperty.all(EdgeInsets.only(top:8)),
                     backgroundColor: MaterialStateProperty.all(Colors.white70), // <-- Button color
                     overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
                       if (states.contains(MaterialState.pressed)) return Colors.white10; // <-- Splash color
