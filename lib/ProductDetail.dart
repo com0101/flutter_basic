@@ -33,7 +33,7 @@ class _ProductDetail extends State<ProductDetail> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: Container(
-                margin: EdgeInsets.only(top: 30),
+                margin: EdgeInsets.only(top: 30, left: 20),
                 // padding: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
@@ -42,6 +42,7 @@ class _ProductDetail extends State<ProductDetail> {
                   },
                   style: ButtonStyle(
                     shape: MaterialStateProperty.all(CircleBorder()),
+                    padding: MaterialStateProperty.all(EdgeInsets.only(right: 2)),
                     backgroundColor: MaterialStateProperty.all(Colors.white70), // <-- Button color
                     overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
                       if (states.contains(MaterialState.pressed)) return Colors.white10; // <-- Splash color
@@ -186,7 +187,7 @@ class _DetailMainImage extends State<DetailMainImage>
                         Container(
                           alignment: Alignment.center,
                           height: 80,
-                          padding: const EdgeInsets.only(bottom:16, left: 8),
+                          padding: const EdgeInsets.only(bottom:8, left: 8),
                           child: CustomSelector(items: sizes, type: SelectorType.size)
                         ),
                       ],
@@ -197,7 +198,7 @@ class _DetailMainImage extends State<DetailMainImage>
                         Container(
                           alignment: Alignment.center,
                           height: 80,
-                          padding: const EdgeInsets.only(bottom:16, left: 8),
+                          padding: const EdgeInsets.only(bottom:8, left: 8),
                           child: CustomSelector(items: colors, type: SelectorType.color)
                         ),
                       ],
@@ -393,7 +394,7 @@ class SizeRadio extends StatelessWidget {
         color: selector.isSelected ? Colors.grey.shade800 : Colors.white,
         child: Container(
           height: 20,
-          width: 44,
+          width: 54,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -429,7 +430,7 @@ class ColorRadio extends StatelessWidget {
         color: Color(selector.color ?? 0xFF3B4257),
         child: Container(
           height: 20,
-          width: 44,
+          width: 54,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
