@@ -71,7 +71,7 @@ class ItemProductView extends StatelessWidget {
             Container(
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.only(left:16, top: 10, right: 16, bottom: 20),
-              child: Text('NT250', style: TextStyle(fontSize: 15, color: Colors.grey)),
+              child: Text('NT\$250', style: TextStyle(fontSize: 15, color: Colors.grey)),
             ),       
           ],),
         )                   

@@ -4,12 +4,6 @@ import 'package:flutter/services.dart';
 import 'package:flutter_stylish/ProductDetail.dart';
 import 'Product.dart';
 
-List<String> titles = <String>[
-  'Girl',
-  'Boy',
-  'Acc',
-];
-
 void main() {
   runApp(const MyApp());
 }
