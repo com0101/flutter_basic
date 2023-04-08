@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
-import '../../style/CustomSelector.dart';
+import '../../style/custom_selector.dart';
 
-class ProductDetail extends StatefulWidget {
-  const ProductDetail({super.key});
+class ProductDetailView extends StatefulWidget {
+  const ProductDetailView({super.key});
 
   @override
-  State<StatefulWidget> createState() => _ProductDetail();
+  State<StatefulWidget> createState() => _ProductDetailView();
 }
 
-class _ProductDetail extends State<ProductDetail> {
+class _ProductDetailView extends State<ProductDetailView> {
    @override
   void dispose() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);

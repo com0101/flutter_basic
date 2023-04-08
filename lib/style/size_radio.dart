@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'CustomSelector.dart';
+import 'custom_selector.dart';
 
 class SizeRadio extends StatelessWidget {
   Selector selector;

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_stylish/view/detail/ProductDetail.dart';
-import 'package:flutter_stylish/view/home/Home.dart';
+import 'package:flutter_stylish/view/detail/product_detail_view.dart';
+import 'package:flutter_stylish/view/home/home.dart';
 
 void main() {
   runApp(const MyApp());
@@ -27,7 +27,7 @@ class _MyApp extends State<MyApp> {
           initialRoute: '/home',
           routes: {
             '/home':(context) =>  Home(), 
-            '/productDetail': (context) => ProductDetail()
+            '/productDetail': (context) => ProductDetailView()
           }
         );
       }),

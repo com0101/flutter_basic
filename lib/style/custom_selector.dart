@@ -1,8 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
-import 'ColorRadio.dart';
-import 'SizeRadio.dart';
+import 'color_radio.dart';
+import 'size_radio.dart';
 
 class CustomSelector extends StatefulWidget {
   const CustomSelector({

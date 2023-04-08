@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'ProductListView.dart';
-import '../../style/CircleTabIndicator.dart';
+import 'package:flutter_stylish/view/Home/product_list_view.dart';
+
+import '../../style/circle_tab_indicator.dart';
+
 
 class Home extends StatefulWidget {
   const Home({super.key});
