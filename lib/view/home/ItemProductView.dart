@@ -1,38 +1,5 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-
-import 'ProductDetail.dart';
-
-class Product extends StatelessWidget {
-  const Product({
-    super.key, required this.name
-  });
-
-  final String name;
-  @override
-  Widget build(BuildContext context) {
-    return LayoutBuilder(
-      builder: (context, constraints) {
-        return Center(
-          child:GridView.builder(
-              primary: false,
-              itemCount: 10,
-              itemBuilder: (BuildContext context, int index) {
-                return const ItemProductView();
-              },
-              gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(  
-                crossAxisCount: constraints.maxWidth >= 850 ? 3 : 1,
-                childAspectRatio: constraints.maxWidth >= 850 
-                ? (MediaQuery.of(context).size.width/1.5) / (MediaQuery.of(context).size.height) 
-                : (MediaQuery.of(context).size.width) / (MediaQuery.of(context).size.height/2.1),
-              )
-            ),
-          );
-      },
-    );
-  }
-
-}
 
 class ItemProductView extends StatelessWidget {
   const ItemProductView({

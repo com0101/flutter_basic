@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import '../../style/CustomSelector.dart';
+
 class ProductDetail extends StatefulWidget {
   const ProductDetail({super.key});
 
@@ -33,7 +35,7 @@ class _ProductDetail extends State<ProductDetail> {
             backgroundColor: Colors.transparent,
             elevation: 0,
             leading: Container(
-                margin: EdgeInsets.only(top: 30, left: 20),
+                margin: const EdgeInsets.only(top: 30, left: 20),
                 // padding: const EdgeInsets.only(top: 20, left: 20),
                 alignment: Alignment.topLeft,
                 child: ElevatedButton(
@@ -41,8 +43,8 @@ class _ProductDetail extends State<ProductDetail> {
                     Navigator.pop(context);
                   },
                   style: ButtonStyle(
-                    shape: MaterialStateProperty.all(CircleBorder()),
-                    padding: MaterialStateProperty.all(EdgeInsets.only(right: 2)),
+                    shape: MaterialStateProperty.all(const CircleBorder()),
+                    padding: MaterialStateProperty.all(const EdgeInsets.only(right: 2)),
                     backgroundColor: MaterialStateProperty.all(Colors.white70), // <-- Button color
                     overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
                       if (states.contains(MaterialState.pressed)) return Colors.white10; // <-- Splash color
@@ -101,7 +103,7 @@ class _DetailMainImage extends State<DetailMainImage>
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(builder: (context, constraints) {
-      cardRadius = constraints.maxWidth >= 850 ? Radius.circular(0) : Radius.circular(20);
+      cardRadius = constraints.maxWidth >= 850 ? const Radius.circular(0) : const Radius.circular(20);
       return SingleChildScrollView(
         child: Stack(
           children: [
@@ -154,7 +156,7 @@ class _DetailMainImage extends State<DetailMainImage>
               top: constraints.maxWidth >= 850 ? 0 : constraints.maxHeight/3,
               left: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : 0,
               right: 0,
-              child: Container(
+              child: SizedBox(
                 height: constraints.maxHeight*1.5,
                 child: Card(
                   margin: const EdgeInsets.only(left: 0, right: 0),
@@ -213,15 +215,15 @@ class _DetailMainImage extends State<DetailMainImage>
                         onPressed: () {
                           
                         },
-                        child: Text('加入購物車'),
                         style: ElevatedButton.styleFrom(
-                          textStyle: TextStyle(color: Colors.white),
-                          padding: EdgeInsets.all(16),
+                          textStyle: const TextStyle(color: Colors.white),
+                          padding: const EdgeInsets.all(16),
                           backgroundColor: Colors.grey.shade800, // <-- Button color
                           shape: RoundedRectangleBorder(
                             borderRadius: BorderRadius.circular(8.0)),
-                            minimumSize: Size(250, 60),
+                            minimumSize: const Size(250, 60),
                           ),
+                        child: const Text('加入購物車'),
                           
                       ),
                     ),
@@ -237,7 +239,7 @@ class _DetailMainImage extends State<DetailMainImage>
                       child: Column(
                         children: [
                           Text('細部說明', style: TextStyle(fontSize: 14, color: Colors.grey.shade800)),
-                          Padding(padding: EdgeInsets.all(8)),
+                          const Padding(padding: EdgeInsets.all(8)),
                           Text('擁有棉質外觀且乾爽舒適的「AIRism」材質。寬鬆優美的版型也極具魅力。由藝術總監Christophe Lemaire所率領的團隊，與位於世界時尚及新素材彙集地巴黎的R&D中心，一同打造出追求高質感的衣著系列。\n\n・擁有高雅洗練的表面質感，內面為平滑性佳的特色舒適素材。\n・採用較窄的圓領設計，打造洗練印象。\n・5分袖設計。\n・特色在於落肩寬版的優美版型。\n・簡約的圓領設計T恤，可打造中性造型。\n・從休閒穿搭到洗練風格等各種造型都好搭配。', style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
                         ],
                     ),)
@@ -263,7 +265,7 @@ class AmountTextInput extends StatelessWidget {
         return Container(
           width: constraints.maxWidth,
           alignment: Alignment.center,
-          padding: EdgeInsets.only(bottom:16),
+          padding: const EdgeInsets.only(bottom:16),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.center,
             mainAxisSize: MainAxisSize.max,
@@ -274,15 +276,15 @@ class AmountTextInput extends StatelessWidget {
                 onPressed: () {
                   
                 },
-                child: Icon(Icons.remove, color: Colors.grey),
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(CircleBorder()),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                  shape: MaterialStateProperty.all(const CircleBorder()),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
                   backgroundColor: MaterialStateProperty.all(Colors.white), // <-- Button color
                   overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
                     if (states.contains(MaterialState.pressed)) return Colors.grey.shade800; // <-- Splash color
                   }),
                 ),
+                child: const Icon(Icons.remove, color: Colors.grey),
               )
             ),
             Container(
@@ -297,7 +299,7 @@ class AmountTextInput extends StatelessWidget {
                 ],
                 style: TextStyle(color: Colors.grey.shade800),
                 decoration: InputDecoration(
-                  enabledBorder: OutlineInputBorder(
+                  enabledBorder: const OutlineInputBorder(
                     borderSide: BorderSide(width: 2, color: Colors.grey),
                   ),
                   focusedBorder: OutlineInputBorder(
@@ -312,10 +314,10 @@ class AmountTextInput extends StatelessWidget {
                 onPressed: () {
                   
                 },
-                child: Icon(Icons.add, color: Colors.grey),
+                child: const Icon(Icons.add, color: Colors.grey),
                 style: ButtonStyle(
-                  shape: MaterialStateProperty.all(CircleBorder()),
-                  padding: MaterialStateProperty.all(EdgeInsets.all(10)),
+                  shape: MaterialStateProperty.all(const CircleBorder()),
+                  padding: MaterialStateProperty.all(const EdgeInsets.all(10)),
                   backgroundColor: MaterialStateProperty.all(Colors.white), // <-- Button color
                   overlayColor: MaterialStateProperty.resolveWith<Color?>((states) {
                     if (states.contains(MaterialState.pressed)) return Colors.grey.shade800; // <-- Splash color
@@ -344,115 +346,4 @@ class LabelTextView extends StatelessWidget {
       child: Text(content, style: TextStyle(fontSize: fontSize, color: Colors.grey.shade800, fontWeight: FontWeight.bold))
     );
   }
-}
-
-class CustomSelector extends StatefulWidget {
-  const CustomSelector({
-    super.key, required this.items, required this.type
-  });
-
-  final List<Selector> items;
-  final SelectorType type;
-  @override
-  _CustomSelector createState() => _CustomSelector();
-}
-
-class _CustomSelector extends State<CustomSelector> {
-
-  @override
-  Widget build(BuildContext context) {
-    return ListView.builder(
-        scrollDirection: Axis.horizontal,
-        shrinkWrap: true,
-        itemCount: widget.items.length,
-        itemBuilder: (context, index) {
-          return InkWell(
-            onTap: () {
-              setState(() {
-                widget.items..forEach((gender) => gender.isSelected = false);
-                widget.items[index].isSelected = true;
-              });
-            },
-            child: widget.type == SelectorType.size ? SizeRadio(widget.items[index]): ColorRadio(widget.items[index]),
-          );
-        });
-  }
-}
-
-class SizeRadio extends StatelessWidget {
-  Selector selector;
-
-  SizeRadio(this.selector);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        shape:const RoundedRectangleBorder(
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
-        margin: EdgeInsets.all(10),
-        color: selector.isSelected ? Colors.grey.shade800 : Colors.white,
-        child: Container(
-          height: 20,
-          width: 54,
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                selector.name ?? '',
-                style: TextStyle(
-                    color: selector.isSelected ? Colors.white : Colors.grey),
-              )
-            ],
-          ),
-        ));
-  }
-}
-
-class ColorRadio extends StatelessWidget {
-  Selector selector;
-
-  ColorRadio(this.selector);
-
-  @override
-  Widget build(BuildContext context) {
-    return Card(
-        shape: RoundedRectangleBorder(
-          side: BorderSide(
-            width: 2,
-            color: selector.isSelected ? Colors.grey.shade800 : Colors.grey.shade200,
-          ),
-          borderRadius: BorderRadius.all(Radius.circular(50)),
-        ),
-        margin: EdgeInsets.all(10),
-        color: Color(selector.color ?? 0xFF3B4257),
-        child: Container(
-          height: 20,
-          width: 54,
-          alignment: Alignment.center,
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Text(
-                selector.name ?? '',
-                style: TextStyle(
-                    color: selector.isSelected ? Colors.white : Colors.grey),
-              )
-            ],
-          ),
-        ));
-  }
-}
-
-enum SelectorType { size, color }
-
-class Selector {
-  String? name;
-  int? color;
-  bool isSelected;
-
-  Selector(this.name, this.color, this.isSelected);
 }
