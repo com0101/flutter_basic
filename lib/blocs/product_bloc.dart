@@ -12,11 +12,29 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
       emit(ProductLoadingState());
       await Future.delayed(Duration(seconds: 2));
       try {
-        final users = await _productRepository.getProduct();
-        emit(ProductSuccessState(users));
+        final products = await _productRepository.getProduct();
+        emit(ProductSuccessState(products));
       } catch (e) {
         emit(ProductErrorState(e.toString()));
       }
     });
   }
+  // most example is writing like this
+  
+  // ProductBloc(super.initialState, this._productRepository);
+
+  // ProductState get initialState => ProductLoadingState();
+
+  // Stream<ProductState> mapEventToState(ProductEvent event) async* {
+  //   if (event is LoadProductEvent) {
+  //     yield ProductLoadingState();
+  //     try {
+  //       final products = await _productRepository.getProduct();
+  //       yield ProductSuccessState(products);
+  //     } catch (e) {
+  //       yield ProductErrorState(e.toString());
+  //     }
+  //   }
+  // }
+
 }
