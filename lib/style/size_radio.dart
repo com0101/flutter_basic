@@ -18,14 +18,14 @@ class SizeRadio extends StatelessWidget {
         color: selector.isSelected ? Colors.grey.shade800 : Colors.white,
         child: Container(
           height: 20,
-          width: 54,
+          width: 52,
           alignment: Alignment.center,
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Text(
-                selector.name ?? '',
+                selector.name,
                 style: TextStyle(
                     color: selector.isSelected ? Colors.white : Colors.grey),
               )

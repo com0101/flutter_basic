@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
+import '../provider/product_detail_provider.dart';
 import 'color_radio.dart';
 import 'size_radio.dart';
 
@@ -19,32 +21,28 @@ class _CustomSelector extends State<CustomSelector> {
 
   @override
   Widget build(BuildContext context) {
-    return ListView.builder(
+    return Consumer<ProductDetailProvider>(
+        builder: (context, value, child) =>ListView.builder(
         scrollDirection: Axis.horizontal,
         shrinkWrap: true,
         itemCount: widget.items.length,
         itemBuilder: (context, index) {
           return InkWell(
             onTap: () {
-              setState(() {
-                for (var item in widget.items) {
-                  item.isSelected = false;
-                }
-                widget.items[index].isSelected = true;
-              });
+              value.setSelector(selectors: widget.items, index: index, type: widget.type);
             },
             child: widget.type == SelectorType.size ? SizeRadio(widget.items[index]): ColorRadio(widget.items[index]),
           );
-        });
+        })
+    );
   }
 }
 
 enum SelectorType { size, color }
 
 class Selector {
-  String? name;
-  int? color;
+  String name;
   bool isSelected;
 
-  Selector(this.name, this.color, this.isSelected);
+  Selector(this.name, this.isSelected);
 }

@@ -1,14 +1,14 @@
 import 'dart:ffi';
 
-import 'package:flutter_stylish/model/color.dart';
-import 'package:flutter_stylish/model/variants.dart';
+import 'package:flutter_stylish/data/color.dart';
+import 'package:flutter_stylish/data/variants.dart';
 
 class ProductContent {
   final Long id;
   final String category;
   final String title;
   final String description;
-  final Int price;
+  final int price;
   final String texture;
   final String wash;
   final String place;
