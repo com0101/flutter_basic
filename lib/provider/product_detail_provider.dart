@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-import '../data/variants.dart';
+import '../model/variants.dart';
 import '../style/custom_selector.dart';
 
 class ProductDetailProvider extends ChangeNotifier {

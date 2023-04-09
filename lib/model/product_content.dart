@@ -1,7 +1,7 @@
 import 'dart:ffi';
 
-import 'package:flutter_stylish/data/color.dart';
-import 'package:flutter_stylish/data/variants.dart';
+import 'package:flutter_stylish/model/color.dart';
+import 'package:flutter_stylish/model/variants.dart';
 
 class ProductContent {
   final Long id;

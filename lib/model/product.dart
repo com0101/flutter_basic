@@ -1,4 +1,4 @@
-import 'package:flutter_stylish/data/product_content.dart';
+import 'package:flutter_stylish/model/product_content.dart';
 
 class Product {
   final List<ProductContent> data;
