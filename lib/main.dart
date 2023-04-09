@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stylish/blocs/product_bloc.dart';
+import 'package:flutter_stylish/repository/product_repo.dart';
 import 'package:flutter_stylish/view/detail/product_detail_view.dart';
 import 'package:flutter_stylish/view/home/home.dart';
 
@@ -17,20 +20,29 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.grey,
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<ProductBloc>(
+          create: (BuildContext context) => ProductBloc(
+            ProductRepository(),
+          ),
+        ),
+      ],
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.grey,
+        ),
+        home: LayoutBuilder(builder: (context, constraints) {
+          return MaterialApp( 
+            initialRoute: '/home',
+            routes: {
+              '/home':(context) =>  Home(), 
+              '/productDetail': (context) => ProductDetailView()
+            }
+          );
+        }),
       ),
-      home: LayoutBuilder(builder: (context, constraints) {
-        return MaterialApp( 
-          initialRoute: '/home',
-          routes: {
-            '/home':(context) =>  Home(), 
-            '/productDetail': (context) => ProductDetailView()
-          }
-        );
-      }),
     );
   }
 }

@@ -1,10 +1,8 @@
-import 'dart:ffi';
-
 import 'package:flutter_stylish/model/color.dart';
 import 'package:flutter_stylish/model/variants.dart';
 
 class ProductContent {
-  final Long id;
+  final int id;
   final String category;
   final String title;
   final String description;
