@@ -27,3 +27,9 @@ class _CirclePainter extends BoxPainter {
     canvas.drawCircle(circleOffset, radius, paint);
   }
 }
+
+enum ProductCatagory{
+  women,
+  men,
+  accessory
+}

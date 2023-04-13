@@ -10,7 +10,6 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
   ProductBloc(this._productRepository) : super(ProductLoadingState()) {
     on<LoadProductEvent>((event, emit) async {
       emit(ProductLoadingState());
-      await Future.delayed(Duration(seconds: 2));
       try {
         final products = await _productRepository.getProduct();
         emit(ProductSuccessState(products));

@@ -2,11 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stylish/blocs/product_bloc.dart';
+import 'package:flutter_stylish/blocs/product_cubit.dart';
+import 'package:flutter_stylish/di/service_locator.dart';
 import 'package:flutter_stylish/repository/product_repo.dart';
 import 'package:flutter_stylish/view/detail/product_detail_view.dart';
 import 'package:flutter_stylish/view/home/home.dart';
 
 void main() {
+  setup();
   runApp(const MyApp());
 }
 
@@ -18,16 +21,11 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
+  final productCubit = getIt<ProductCubit>();
   @override
   Widget build(BuildContext context) {
-    return MultiBlocProvider(
-      providers: [
-        BlocProvider<ProductBloc>(
-          create: (BuildContext context) => ProductBloc(
-            ProductRepository(),
-          ),
-        ),
-      ],
+    return BlocProvider<ProductCubit>(
+      create: (BuildContext context) => productCubit,
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

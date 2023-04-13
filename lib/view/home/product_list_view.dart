@@ -1,13 +1,58 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_stylish/model/product_content.dart';
+import '../../blocs/product_cubit.dart';
+import '../../blocs/product_state.dart';
+import '../../di/service_locator.dart';
+import '../../style/circle_tab_indicator.dart';
 import 'Item_product_view.dart';
 
 class ProductListView extends StatelessWidget {
-  const ProductListView({
-    super.key, required this.name
+  ProductListView({
+    super.key, required this.catagory
+  });
+  final ProductCatagory catagory;
+  final productCubit = getIt.get<ProductCubit>();
+
+  @override
+  Widget build(BuildContext context) {
+    switch(catagory) {
+      case ProductCatagory.women: productCubit.getWomenProducts();
+      break;
+      case ProductCatagory.men: productCubit.getMenProducts();
+      break;
+      case ProductCatagory.accessory: productCubit.getAccessoriesProducts();
+      break;
+    }
+    return BlocBuilder<ProductCubit, ProductState>(
+      builder: (context, state) {
+        return _status(state);
+      }
+    );
+  }
+
+  Widget _status(ProductState status) {
+    if(status is ProductLoadingState) {
+      return const Center(
+          child: CircularProgressIndicator(),
+      );
+    } else if (status is ProductSuccessState) {
+      return SuccessView(products: status.products);
+    } else if (status is ProductErrorState) {
+      return Center(child:  Text(status.error));
+    }
+    return Container();
+  }
+
+}
+
+class SuccessView extends StatelessWidget {
+  const SuccessView({
+    super.key, required this.products
   });
 
-  final String name;
+  final List<ProductContent> products; 
+
   @override
   Widget build(BuildContext context) {
     return LayoutBuilder(
@@ -17,7 +62,7 @@ class ProductListView extends StatelessWidget {
               primary: false,
               itemCount: 10,
               itemBuilder: (BuildContext context, int index) {
-                return const ItemProductView();
+                return ItemProductView(product: products[index]);
               },
               gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(  
                 crossAxisCount: constraints.maxWidth >= 850 ? 3 : 1,
@@ -30,6 +75,5 @@ class ProductListView extends StatelessWidget {
       },
     );
   }
-
 }
 

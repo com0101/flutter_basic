@@ -1,12 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stylish/blocs/product_bloc.dart';
+import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/blocs/product_state.dart';
 import 'package:flutter_stylish/view/Home/product_list_view.dart';
 import 'package:flutter_stylish/view/home/item_main_Image_view.dart';
-
-import '../../blocs/product_event.dart';
 import '../../style/circle_tab_indicator.dart';
 
 
@@ -19,13 +17,10 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> with SingleTickerProviderStateMixin {
   late TabController tabController;
-  late ProductBloc productBloc;
-
+  
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
-    productBloc = BlocProvider.of<ProductBloc>(context);
-    productBloc.add(LoadProductEvent());
     super.initState();
   }
 
@@ -37,7 +32,7 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductBloc, ProductState>(
+    return BlocBuilder<ProductCubit, ProductState>(
       builder: (context, state) {
         return Scaffold(
           backgroundColor: Colors.white,
@@ -70,7 +65,7 @@ Widget _status(ProductState status, TabController tabController) {
         child: CircularProgressIndicator(),
     );
   } else if (status is ProductSuccessState) {
-    return ProductSuccessView(tabController: tabController);
+    return ProductView(tabController: tabController);
   } else if (status is ProductErrorState) {
 
     return Center(child:  Text(status.error));
@@ -78,8 +73,8 @@ Widget _status(ProductState status, TabController tabController) {
   return Container();
 }
 
-class ProductSuccessView extends StatelessWidget {
-  const ProductSuccessView({
+class ProductView extends StatelessWidget {
+  const ProductView({
     super.key,
     required this.tabController,
   });
@@ -116,10 +111,8 @@ class ProductSuccessView extends StatelessWidget {
             padding: const EdgeInsets.only(left: 8, right: 8),
             child: TabBarView(
               controller: tabController,
-              children: const [
-                ProductListView(name: 'Girl'),
-                ProductListView(name: 'Boy'),
-                ProductListView(name: 'Acc'),
+              children: [
+                ProductListView(name: name)
               ],
             ),
         ))

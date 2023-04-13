@@ -43,7 +43,7 @@ class ProductDetailProvider extends ChangeNotifier {
   }
 
   void getSize({required List<Variants> variants, required String color}) {
-    _sizeVariants = variants.where((variant) => variant.color_code == color).toList();
+    _sizeVariants = variants.where((variant) => variant.colorCode == color).toList();
     notifyListeners();
   }
 }

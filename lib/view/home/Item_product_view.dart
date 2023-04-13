@@ -1,10 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
+import '../../model/product_content.dart';
+
 class ItemProductView extends StatelessWidget {
   const ItemProductView({
-    super.key,
+    super.key, required this.product
   });
+
+  final ProductContent product;
 
   @override
   Widget build(BuildContext context) {
@@ -26,19 +30,19 @@ class ItemProductView extends StatelessWidget {
             children: [
             Container(     
               height: 200,             
-              child: Image.asset(
-                'assets/images/cloth_1.jpg', 
+              child: Image.network(
+                product.mainImage ?? 'assets/images/cloth_1.jpg', 
                 fit: BoxFit.cover),
             ),
             Container(
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.only(left:16, top: 20, right: 16),
-              child: Text('男裝 U AIRism棉質寬版圓領T恤(五分袖) 455359', style: TextStyle(fontSize: 16)),
+              child: Text(product.title ?? '', style: const TextStyle(fontSize: 16)),
             ),
             Container(
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.only(left:16, top: 10, right: 16, bottom: 20),
-              child: Text('NT\$250', style: TextStyle(fontSize: 15, color: Colors.grey)),
+              child: Text('NT\$${product.price}', style: const TextStyle(fontSize: 15, color: Colors.grey)),
             ),       
           ],),
         )                   
