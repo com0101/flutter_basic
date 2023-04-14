@@ -1,8 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stylish/blocs/product_cubit.dart';
-import 'package:flutter_stylish/blocs/product_state.dart';
 import 'package:flutter_stylish/view/Home/product_list_view.dart';
 import 'package:flutter_stylish/view/home/item_main_Image_view.dart';
 import '../../style/circle_tab_indicator.dart';

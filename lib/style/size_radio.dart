@@ -4,9 +4,8 @@ import 'package:flutter/material.dart';
 import 'custom_selector.dart';
 
 class SizeRadio extends StatelessWidget {
-  Selector selector;
-
-  SizeRadio(this.selector);
+  const SizeRadio({super.key, required this.selector});
+  final Selector selector;
 
   @override
   Widget build(BuildContext context) {

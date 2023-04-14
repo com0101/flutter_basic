@@ -1,5 +1,3 @@
-import 'dart:convert';
-
 import 'package:flutter_stylish/model/color.dart';
 import 'package:flutter_stylish/model/variants.dart';
 import 'package:json_annotation/json_annotation.dart';

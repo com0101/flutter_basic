@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -31,7 +30,7 @@ class _CustomSelector extends State<CustomSelector> {
             onTap: () {
               value.setSelector(selectors: widget.items, index: index, type: widget.type);
             },
-            child: widget.type == SelectorType.size ? SizeRadio(widget.items[index]): ColorRadio(widget.items[index]),
+            child: widget.type == SelectorType.size ? SizeRadio(selector: widget.items[index]): ColorRadio(selector: widget.items[index]),
           );
         })
     );

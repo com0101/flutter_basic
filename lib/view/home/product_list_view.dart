@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stylish/model/product_content.dart';
+import 'package:flutter_stylish/style/circle_tab_indicator.dart';
 import '../../blocs/product_cubit.dart';
 import '../../blocs/product_state.dart';
-import '../../style/circle_tab_indicator.dart';
 import 'Item_product_view.dart';
 
 class ProductListView extends StatelessWidget {

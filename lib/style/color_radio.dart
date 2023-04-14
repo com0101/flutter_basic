@@ -1,13 +1,11 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_stylish/extension.dart';
 
 import 'custom_selector.dart';
 
 class ColorRadio extends StatelessWidget {
-  Selector selector;
-
-  ColorRadio(this.selector);
+  const ColorRadio({super.key, required this.selector});
+  final Selector selector;
 
   @override
   Widget build(BuildContext context) {

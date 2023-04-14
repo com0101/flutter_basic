@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
 import '../../model/product_content.dart';
@@ -12,7 +11,6 @@ class ItemProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print("get: ${product.mainImage}");
     return Container(
       height: 500,
       padding: const EdgeInsets.all(8.0), 

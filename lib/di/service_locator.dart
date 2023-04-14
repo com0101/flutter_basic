@@ -1,5 +1,4 @@
 import 'package:dio/dio.dart';
-import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:get_it/get_it.dart';
 
 import '../network/dio_client.dart';

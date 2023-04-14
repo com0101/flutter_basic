@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_stylish/blocs/product_bloc.dart';
 import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/di/service_locator.dart';
-import 'package:flutter_stylish/repository/product_repo.dart';
 import 'package:flutter_stylish/view/detail/product_detail_view.dart';
 import 'package:flutter_stylish/view/home/home.dart';
 
