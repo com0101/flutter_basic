@@ -12,7 +12,9 @@ class ItemProductView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    print("get: ${product.mainImage}");
     return Container(
+      height: 500,
       padding: const EdgeInsets.all(8.0), 
       child: Card(
         semanticContainer: true,

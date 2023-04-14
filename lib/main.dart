@@ -21,11 +21,10 @@ class MyApp extends StatefulWidget {
 }
 
 class _MyApp extends State<MyApp> {
-  final productCubit = getIt<ProductCubit>();
   @override
   Widget build(BuildContext context) {
     return BlocProvider<ProductCubit>(
-      create: (BuildContext context) => productCubit,
+      create: (BuildContext context) => ProductCubit(),
       child: MaterialApp(
         title: 'Flutter Demo',
         theme: ThemeData(

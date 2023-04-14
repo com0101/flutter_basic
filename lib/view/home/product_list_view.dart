@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stylish/model/product_content.dart';
 import '../../blocs/product_cubit.dart';
 import '../../blocs/product_state.dart';
-import '../../di/service_locator.dart';
 import '../../style/circle_tab_indicator.dart';
 import 'Item_product_view.dart';
 
@@ -12,10 +11,11 @@ class ProductListView extends StatelessWidget {
     super.key, required this.catagory
   });
   final ProductCatagory catagory;
-  final productCubit = getIt.get<ProductCubit>();
+  late ProductCubit productCubit;
 
   @override
   Widget build(BuildContext context) {
+    productCubit = BlocProvider.of<ProductCubit>(context);
     switch(catagory) {
       case ProductCatagory.women: productCubit.getWomenProducts();
       break;
@@ -60,7 +60,7 @@ class SuccessView extends StatelessWidget {
         return Center(
           child:GridView.builder(
               primary: false,
-              itemCount: 10,
+              itemCount: products.length,
               itemBuilder: (BuildContext context, int index) {
                 return ItemProductView(product: products[index]);
               },

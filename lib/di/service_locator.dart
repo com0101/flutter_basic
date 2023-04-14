@@ -13,5 +13,4 @@ Future<void> setup() async {
   getIt.registerSingleton(DioClient(getIt<Dio>()));
   getIt.registerSingleton(ProductApi(dioClient: getIt<DioClient>()));
   getIt.registerSingleton(ProductRepository(getIt.get<ProductApi>()));
-  getIt.registerSingleton(ProductCubit());
 }

@@ -17,7 +17,6 @@ class Home extends StatefulWidget {
 
 class _Home extends State<Home> with SingleTickerProviderStateMixin {
   late TabController tabController;
-  
   @override
   void initState() {
     tabController = TabController(length: 3, vsync: this);
@@ -32,45 +31,27 @@ class _Home extends State<Home> with SingleTickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return BlocBuilder<ProductCubit, ProductState>(
-      builder: (context, state) {
-        return Scaffold(
-          backgroundColor: Colors.white,
-          appBar: AppBar(
-            // Here we take the value from the MyHomePage object that was created by
-            // the App.build method, and use it to set our appbar title.
-            systemOverlayStyle: const SystemUiOverlayStyle(
-              // Status bar color
-              statusBarColor: Colors.white,
-              // Status bar brightness
-              statusBarIconBrightness:
-                  Brightness.dark, // For Android (dark icons)
-            ),
-            backgroundColor: Colors.white,
-            title: Image.asset('assets/images/Image_Logo.png', height: 38),
-            centerTitle: true,
-            toolbarHeight: 80,
-            elevation: 0,
-          ),
-          body:  _status(state, tabController),
-        );
-      }
+    return Scaffold(
+      backgroundColor: Colors.white,
+      appBar: AppBar(
+        // Here we take the value from the MyHomePage object that was created by
+        // the App.build method, and use it to set our appbar title.
+        systemOverlayStyle: const SystemUiOverlayStyle(
+          // Status bar color
+          statusBarColor: Colors.white,
+          // Status bar brightness
+          statusBarIconBrightness:
+              Brightness.dark, // For Android (dark icons)
+        ),
+        backgroundColor: Colors.white,
+        title: Image.asset('assets/images/Image_Logo.png', height: 38),
+        centerTitle: true,
+        toolbarHeight: 80,
+        elevation: 0,
+      ),
+      body:  ProductView(tabController: tabController),
     );
   }
-}
-
-Widget _status(ProductState status, TabController tabController) {
-  if(status is ProductLoadingState) {
-    return const Center(
-        child: CircularProgressIndicator(),
-    );
-  } else if (status is ProductSuccessState) {
-    return ProductView(tabController: tabController);
-  } else if (status is ProductErrorState) {
-
-    return Center(child:  Text(status.error));
-  }
-  return Container();
 }
 
 class ProductView extends StatelessWidget {
@@ -112,7 +93,9 @@ class ProductView extends StatelessWidget {
             child: TabBarView(
               controller: tabController,
               children: [
-                ProductListView(name: name)
+                ProductListView(catagory: ProductCatagory.women),
+                ProductListView(catagory: ProductCatagory.men),
+                ProductListView(catagory: ProductCatagory.accessory),
               ],
             ),
         ))

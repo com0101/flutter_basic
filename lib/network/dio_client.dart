@@ -29,6 +29,7 @@ class DioClient {
         cancelToken: cancelToken,
         onReceiveProgress: onReceiveProgress,
       );
+      print(response);
       return response;
     } catch (e) {
       rethrow;

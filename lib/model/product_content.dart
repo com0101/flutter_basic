@@ -41,11 +41,11 @@ class ProductContent {
     place = json['place'];
     note = json['note'];
     story = json['story'];
-    colors = json['colors'];
-    sizes = json['sizes'];
-    variants = json['variants'];
-    mainImage = json['mainImage'];
-    images = json['images'];
+    colors = json['colors'].cast<Color>();
+    sizes = json['sizes'].cast<String>();
+    variants = json['variants'].cast<Variants>();
+    mainImage = json['main_image'];
+    images = json['images'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
@@ -60,11 +60,11 @@ class ProductContent {
     place = data['place'];
     note = data['note'];
     story = data['story'];
-    colors = data['colors'];
-    sizes = data['sizes'];
-    variants = data['variants'];
-    mainImage = data['mainImage'];
-    images = data['images'];
+   colors = data['colors'].cast<Color>();
+    sizes = data['sizes'].cast<String>();
+    variants = data['variants'].cast<Variants>();
+    mainImage = data['main_image'];
+    images = data['images'].cast<String>();
     return data;
   }
 
