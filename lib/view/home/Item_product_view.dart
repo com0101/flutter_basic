@@ -1,4 +1,7 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_stylish/route/app_router.gr.dart';
+import 'package:flutter_stylish/view/detail/product_detail_view.dart';
 
 import '../../model/product_content.dart';
 
@@ -23,7 +26,8 @@ class ItemProductView extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            Navigator.pushNamed(context, "/productDetail", arguments: product);
+            context.router.push(ProductDetailRouter(productContent: product, productId: product.id));
+            // Navigator.pushNamed(context, "/productDetail", arguments: product);
           }, // item click
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,

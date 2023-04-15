@@ -2,8 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/di/service_locator.dart';
-import 'package:flutter_stylish/view/detail/product_detail_view.dart';
-import 'package:flutter_stylish/view/home/home.dart';
+import 'package:flutter_stylish/route/app_router.gr.dart';
 
 void main() {
   setup();
@@ -20,6 +19,7 @@ class MyApp extends StatefulWidget {
 class _MyApp extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
+    final appRouter = getIt<AppRouter>();
     return BlocProvider<ProductCubit>(
       create: (BuildContext context) => ProductCubit(),
       child: MaterialApp(
@@ -27,15 +27,10 @@ class _MyApp extends State<MyApp> {
         theme: ThemeData(
           primarySwatch: Colors.grey,
         ),
-        home: LayoutBuilder(builder: (context, constraints) {
-          return MaterialApp( 
-            initialRoute: '/home',
-            routes: {
-              '/home':(context) =>  Home(), 
-              '/productDetail': (context) => ProductDetailView()
-            }
-          );
-        }),
+        home: MaterialApp.router( 
+          routerDelegate: appRouter.delegate(),
+          routeInformationParser: appRouter.defaultRouteParser()
+        ),
       ),
     );
   }
