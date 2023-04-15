@@ -1,3 +1,4 @@
+import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stylish/model/product_content.dart';
@@ -8,8 +9,13 @@ import '../../style/custom_selector.dart';
 
 
 class ProductDetailView extends StatefulWidget {
-  const ProductDetailView({super.key});
+  const ProductDetailView({
+    super.key, 
+    @PathParam('productId') required this.productId,
+    required this.productContent});
 
+  final int productId;
+  final ProductContent productContent;
   @override
   State<StatefulWidget> createState() => _ProductDetailView();
 }
@@ -60,8 +66,8 @@ class _ProductDetailView extends State<ProductDetailView> {
                 ),
             ),
             body: Column(
-              children: const [
-                Expanded(child: DetailMainImage()),
+              children: [
+                Expanded(child: DetailMainImage(product: widget.productContent,)),
               ],
             )
           );
@@ -72,7 +78,8 @@ class _ProductDetailView extends State<ProductDetailView> {
 }
 
 class DetailMainImage extends StatefulWidget {
-  const DetailMainImage({super.key});
+  const DetailMainImage({super.key, required this.product});
+  final ProductContent product;
 
   @override
   State<StatefulWidget> createState() => _DetailMainImage();
@@ -97,7 +104,7 @@ class _DetailMainImage extends State<DetailMainImage>
 
   @override
   Widget build(BuildContext context) {
-    final ProductContent product = ModalRoute.of(context)!.settings.arguments as ProductContent;
+    final ProductContent product = widget.product;
     context.read<ProductDetailProvider>().getColorList(product.colors);
     context.read<ProductDetailProvider>().getSizeList(product.sizes);
     
