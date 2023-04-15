@@ -3,9 +3,9 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class Product {
-  List<ProductContent>? data;
+  List<ProductContent> data = List.empty();
   @JsonKey(name: 'next_paging')
-  int? nextPaging;
+  int nextPaging = 0;
 
   Product(this.data, this.nextPaging);
 

@@ -2,8 +2,8 @@ import 'package:json_annotation/json_annotation.dart';
 
 @JsonSerializable()
 class Color {
-  String? code;
-  String? name;
+  String code = 'no data';
+  String name = 'no data';
   
   Color(this.code, this.name);
 
@@ -12,7 +12,7 @@ class Color {
     name = json['name'];
   }
 
-  Map<String, dynamic> toJson() {
+  Map<String, dynamic> toJson(data) {
     final Map<String, dynamic> data = <String, dynamic>{};
     code = data['code'];
     name = data['name'];

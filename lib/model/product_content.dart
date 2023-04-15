@@ -3,22 +3,22 @@ import 'package:flutter_stylish/model/variants.dart';
 import 'package:json_annotation/json_annotation.dart';
 
 class ProductContent {
-  int? id;
-  String? category;
-  String? title;
-  String? description;
-  int? price;
-  String? texture;
-  String? wash;
-  String? place;
-  String? note;
-  String? story;
-  List<Color>? colors;
-  List<String>? sizes;
-  List<Variants>? variants;
+  int id = 0;
+  String category = 'no data';
+  String title = 'no data';
+  String description = 'no data';
+  int price = 0;
+  String texture = 'no data';
+  String wash = 'no data';
+  String place = 'no data';
+  String note = 'no data';
+  String story = 'no data';
+  List<Color> colors = List.empty();
+  List<String> sizes = List.empty();
+  List<Variants> variants = List.empty();
   @JsonKey(name: 'main_image')
-  String? mainImage;
-  List<String>? images;
+  String mainImage = 'no data';
+  List<String> images = List.empty();
 
 
   ProductContent(
@@ -29,6 +29,9 @@ class ProductContent {
   );
 
   ProductContent.fromJson(Map<String, dynamic> json) {
+    final List<Color> colorList = (json['colors'] as List).map((e) => Color.fromJson(e)).toList();
+    final List<Variants> variantsList = (json['variants'] as List).map((e) => Variants.fromJson(e)).toList();
+
     id = json['id'];
     category = json['category'];
     title = json['title'];
@@ -39,15 +42,16 @@ class ProductContent {
     place = json['place'];
     note = json['note'];
     story = json['story'];
-    colors = json['colors'].cast<Color>();
+    colors = colorList;
     sizes = json['sizes'].cast<String>();
-    variants = json['variants'].cast<Variants>();
+    variants = variantsList;
     mainImage = json['main_image'];
     images = json['images'].cast<String>();
   }
 
   Map<String, dynamic> toJson() {
     final Map<String, dynamic> data = <String, dynamic>{};
+
     id = data['id'];
     category = data['category'];
     title = data['title'];

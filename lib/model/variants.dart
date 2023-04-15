@@ -3,9 +3,9 @@ import 'package:json_annotation/json_annotation.dart';
 @JsonSerializable()
 class Variants {
   @JsonKey(name: 'color_code')
-  String? colorCode;
-  String? size;
-  int? stock;
+  String colorCode = 'no data';
+  String size = 'no data';
+  int stock = 0;
 
   Variants(this.colorCode, this.size, this.stock);
 

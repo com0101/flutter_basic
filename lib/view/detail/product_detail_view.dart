@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stylish/model/product_content.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/product_detail_provider.dart';
@@ -96,8 +97,10 @@ class _DetailMainImage extends State<DetailMainImage>
 
   @override
   Widget build(BuildContext context) {
-    context.read<ProductDetailProvider>().getColorList();
-    context.read<ProductDetailProvider>().getSizeList();
+    final ProductContent product = ModalRoute.of(context)!.settings.arguments as ProductContent;
+    context.read<ProductDetailProvider>().getColorList(product.colors);
+    context.read<ProductDetailProvider>().getSizeList(product.sizes);
+    
     return LayoutBuilder(builder: (context, constraints) {
         cardRadius = constraints.maxWidth >= 850 ? const Radius.circular(0) : const Radius.circular(20);
         return SingleChildScrollView(
@@ -112,24 +115,14 @@ class _DetailMainImage extends State<DetailMainImage>
                 child: TabBarView(
                   controller: imageController,
                   children: [
-                    Image.asset(
-                      'assets/images/cloth_1.jpg',
-                      fit: BoxFit.cover,
-                      width: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : constraints.maxWidth,
-                      height: constraints.maxWidth >= 850 ? constraints.maxHeight*1.5 : constraints.maxHeight/2,
-                    ),
-                    Image.asset(
-                      'assets/images/cloth_1.jpg',
-                      fit: BoxFit.cover,
-                      width: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : constraints.maxWidth,
-                      height: constraints.maxWidth >= 850 ? constraints.maxHeight*1.5 : constraints.maxHeight/2,
-                    ),
-                    Image.asset(
-                      'assets/images/cloth_1.jpg',
-                      fit: BoxFit.cover,
-                      width: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : constraints.maxWidth,
-                      height: constraints.maxWidth >= 850 ? constraints.maxHeight*1.5 : constraints.maxHeight/2,
-                    ),
+                    for(int x = 0; x<product.images.length; x++)...[
+                      Image.network(
+                        product.images[x],
+                        fit: BoxFit.cover,
+                        width: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : constraints.maxWidth,
+                        // height: constraints.maxWidth >= 850 ? constraints.maxHeight*1.5 : constraints.maxHeight/2,
+                      ),
+                    ],
                   ],
                 )
               ),
@@ -167,17 +160,17 @@ class _DetailMainImage extends State<DetailMainImage>
                       ListTile(
                         title: Container(
                           padding: const EdgeInsets.only(bottom: 8, top: 20, left: 4),
-                          child: Text('男裝 U AIRism棉質寬版圓領T恤(五分袖)', style: TextStyle(fontSize: 20, color: Colors.grey.shade800)),
+                          child: Text(product.title, style: TextStyle(fontSize: 20, color: Colors.grey.shade800)),
                         ),
                         subtitle: Container(
                           padding: const EdgeInsets.only(bottom:8, left: 4),
-                          child: const Text('455359', style: TextStyle(fontSize: 13)),
+                          child: Text('${product.id}', style: TextStyle(fontSize: 13)),
                         )
                       ),
                       Container(
                         alignment: Alignment.topLeft,
                         padding: const EdgeInsets.only(bottom: 20, left: 20),
-                        child: Text('NT\$450', style: TextStyle(fontSize: 20, color: Colors.grey.shade800)),
+                        child: Text('NT\$${product.price}', style: TextStyle(fontSize: 20, color: Colors.grey.shade800)),
                       ),
                       Row(
                         children: [
@@ -228,12 +221,11 @@ class _DetailMainImage extends State<DetailMainImage>
                             
                         ),
                       ),
-                      const LabelTextView(content: '實品顏色依單品照為主'),
-                      const LabelTextView(content: '棉 100%'),
-                      const LabelTextView(content: '厚薄: 薄'),
-                      const LabelTextView(content: '彈性: 無'),
-                      const LabelTextView(content: '素材產地: 日本'),
-                      const LabelTextView(content: '加工產地: 中國'),
+                      LabelTextView(content: product.description),
+                      LabelTextView(content: product.note),
+                      LabelTextView(content: '材質: ${product.texture}'),
+                      LabelTextView(content: '清潔: ${product.wash}'),
+                      LabelTextView(content: '產地: ${product.place}'),
                       Container(
                         alignment: Alignment.topLeft,
                         padding: const EdgeInsets.only(bottom: 20, left: 20, right: 20),
@@ -241,7 +233,7 @@ class _DetailMainImage extends State<DetailMainImage>
                           children: [
                             Text('細部說明', style: TextStyle(fontSize: 14, color: Colors.grey.shade800)),
                             const Padding(padding: EdgeInsets.all(8)),
-                            Text('擁有棉質外觀且乾爽舒適的「AIRism」材質。寬鬆優美的版型也極具魅力。由藝術總監Christophe Lemaire所率領的團隊，與位於世界時尚及新素材彙集地巴黎的R&D中心，一同打造出追求高質感的衣著系列。\n\n・擁有高雅洗練的表面質感，內面為平滑性佳的特色舒適素材。\n・採用較窄的圓領設計，打造洗練印象。\n・5分袖設計。\n・特色在於落肩寬版的優美版型。\n・簡約的圓領設計T恤，可打造中性造型。\n・從休閒穿搭到洗練風格等各種造型都好搭配。', style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
+                            Text(product.story, style: TextStyle(fontSize: 12, color: Colors.grey.shade500)),
                           ],
                       ),)
                   ]),),

@@ -23,7 +23,7 @@ class ItemProductView extends StatelessWidget {
         ),
         child: InkWell(
           onTap: () {
-            Navigator.pushNamed(context, "/productDetail");
+            Navigator.pushNamed(context, "/productDetail", arguments: product);
           }, // item click
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
@@ -31,13 +31,13 @@ class ItemProductView extends StatelessWidget {
             Container(     
               height: 200,             
               child: Image.network(
-                product.mainImage ?? 'assets/images/cloth_1.jpg', 
+                product.mainImage, 
                 fit: BoxFit.cover),
             ),
             Container(
               alignment: Alignment.topLeft,
               padding: const EdgeInsets.only(left:16, top: 20, right: 16),
-              child: Text(product.title ?? '', style: const TextStyle(fontSize: 16)),
+              child: Text(product.title, style: const TextStyle(fontSize: 16)),
             ),
             Container(
               alignment: Alignment.topLeft,

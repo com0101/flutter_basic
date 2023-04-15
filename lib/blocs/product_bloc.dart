@@ -11,7 +11,7 @@ class ProductBloc extends Bloc<ProductEvent, ProductState> {
     on<LoadProductEvent>((event, emit) async {
       emit(ProductLoadingState());
       try {
-        final products = await _productRepository.getProduct();
+        final products = await _productRepository.getWomenProducts();
         emit(ProductSuccessState(products));
       } catch (e) {
         emit(ProductErrorState(e.toString()));
