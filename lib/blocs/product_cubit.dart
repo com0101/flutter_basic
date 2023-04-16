@@ -39,6 +39,16 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
+  void getProductById(num id) async {
+    emit(ProductLoadingState());
+    try {
+      final product = await _productRepository.getProductById(id);
+      emit(DetailSuccessState(product));
+    } catch (e) {
+      emit(ProductErrorState(e.toString()));
+    }
+  }
+
   @override
   void onChange(Change<ProductState> change) {
     print(change);

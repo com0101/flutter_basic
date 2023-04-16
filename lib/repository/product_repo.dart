@@ -46,4 +46,16 @@ class ProductRepository {
       throw errorMessage;
     }
   }
+
+  Future<ProductContent> getProductById(num id) async {
+    try {
+      final response = await productApi.getProductById(id);
+      final product = (response.data['data'])
+          .map((e) => ProductContent.fromJson(e));
+      return product;
+    } on DioError catch (e) {
+      final errorMessage = DioExceptions.fromDioError(e).toString();
+      throw errorMessage;
+    }
+  }
 }

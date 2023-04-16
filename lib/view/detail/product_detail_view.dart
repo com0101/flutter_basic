@@ -1,6 +1,7 @@
 import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/model/product_content.dart';
 import 'package:provider/provider.dart';
 
@@ -14,13 +15,16 @@ class ProductDetailView extends StatefulWidget {
     @PathParam('productId') required this.productId,
     required this.productContent});
 
-  final int productId;
+  final String productId;
   final ProductContent productContent;
+
   @override
   State<StatefulWidget> createState() => _ProductDetailView();
 }
 
 class _ProductDetailView extends State<ProductDetailView> {
+  late ProductCubit productCubit;
+
    @override
   void dispose() {
     SystemChrome.setEnabledSystemUIMode(SystemUiMode.manual, overlays: SystemUiOverlay.values);

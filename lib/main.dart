@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/di/service_locator.dart';
-import 'package:flutter_stylish/route/app_router.gr.dart';
+import 'package:flutter_stylish/route/app_router.dart';
+import 'package:go_router/go_router.dart';
 
 void main() {
+  GoRouter.setUrlPathStrategy(UrlPathStrategy.path); // remove #
   setup();
   runApp(const MyApp());
 }
@@ -28,8 +30,8 @@ class _MyApp extends State<MyApp> {
           primarySwatch: Colors.grey,
         ),
         home: MaterialApp.router( 
-          routerDelegate: appRouter.delegate(),
-          routeInformationParser: appRouter.defaultRouteParser()
+          routerDelegate: appRouter.route.routerDelegate,
+          routeInformationParser: appRouter.route.routeInformationParser
         ),
       ),
     );

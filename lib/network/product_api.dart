@@ -40,4 +40,16 @@ class ProductApi {
       rethrow;
     }
   }
+
+   Future<Response> getProductById(num id) async {
+    try {
+      final Response response = await dioClient.get(
+        Endpoint.productDetail,
+        queryParameters: {"id": id},
+      );
+      return response;
+    } catch (e) {
+      rethrow;
+    }
+  }
 }
