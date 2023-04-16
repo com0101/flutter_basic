@@ -1,8 +1,8 @@
-import 'package:auto_route/annotations.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/model/product_content.dart';
+import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
 import '../../provider/product_detail_provider.dart';
@@ -12,7 +12,7 @@ import '../../style/custom_selector.dart';
 class ProductDetailView extends StatefulWidget {
   const ProductDetailView({
     super.key, 
-    @PathParam('productId') required this.productId,
+    required this.productId,
     required this.productContent});
 
   final String productId;
@@ -55,7 +55,7 @@ class _ProductDetailView extends State<ProductDetailView> {
                   alignment: Alignment.topLeft,
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.pop(context);
+                      context.pop();
                     },
                     style: ButtonStyle(
                       shape: MaterialStateProperty.all(const CircleBorder()),
@@ -96,7 +96,7 @@ class _DetailMainImage extends State<DetailMainImage>
 
   @override
   void initState() {
-    imageController = TabController(length: 3, vsync: this);
+    imageController = TabController(length: widget.product.images.length, vsync: this);
     super.initState();
   }
 
@@ -140,7 +140,7 @@ class _DetailMainImage extends State<DetailMainImage>
               Positioned(
                 top: constraints.maxWidth >= 850 ? constraints.maxHeight-50 : constraints.maxHeight/3-25,
                 left: 0,
-                right: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : 0,
+                right: constraints.maxWidth >= 850 ? constraints.maxWidth/3 : 0,
                 height: 15,
                 child: Container(
                   height: 15,
@@ -154,7 +154,7 @@ class _DetailMainImage extends State<DetailMainImage>
               ),
               Positioned(
                 top: constraints.maxWidth >= 850 ? 0 : constraints.maxHeight/3,
-                left: constraints.maxWidth >= 850 ? constraints.maxWidth/2 : 0,
+                left: constraints.maxWidth >= 850 ? constraints.maxWidth/1.5 : 0,
                 right: 0,
                 child: SizedBox(
                   height: constraints.maxHeight*1.5,

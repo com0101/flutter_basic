@@ -25,7 +25,7 @@ class ItemProductView extends StatelessWidget {
         child: InkWell(
           onTap: () {
             print(product);
-            context.goNamed('product', params: {"productId": "${product.id}"}, extra: product);
+            context.pushNamed('product', params: {"productId": "${product.id}"}, extra: product);
           }, // item click
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
