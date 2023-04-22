@@ -1,8 +1,8 @@
 import 'package:bloc/bloc.dart';
-import 'package:flutter_stylish/blocs/product_state.dart';
+import 'package:flutter_stylish/blocs/product/product_state.dart';
 import 'package:flutter_stylish/repository/product_repo.dart';
 
-import '../di/service_locator.dart';
+import '../../di/service_locator.dart';
 
 class ProductCubit extends Cubit<ProductState> {
   final _productRepository = getIt.get<ProductRepository>();

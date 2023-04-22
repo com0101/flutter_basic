@@ -2,6 +2,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter_stylish/model/product_content.dart';
 import 'package:flutter_stylish/network/product_api.dart';
 import '../network/dio_exceptions.dart';
+import 'package:flutter/services.dart';
 
 class ProductRepository {
   final ProductApi productApi;
@@ -56,6 +57,16 @@ class ProductRepository {
     } on DioError catch (e) {
       final errorMessage = DioExceptions.fromDioError(e).toString();
       throw errorMessage;
+    }
+  }
+
+  Future<String> getBatteryLevel() async {
+    const platform = MethodChannel('mediumExplain/battery');
+    try {
+      final int result = await platform.invokeMethod('getBatteryLevel');
+      return 'Battery level at $result % .';
+    } on PlatformException catch (e) {
+      return "Failed to get battery level: '${e.message}'.";
     }
   }
 }

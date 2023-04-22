@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:flutter_stylish/blocs/product_cubit.dart';
 import 'package:flutter_stylish/model/product_content.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
 
+import '../../blocs/product/product_cubit.dart';
 import '../../provider/product_detail_provider.dart';
 import '../../style/custom_selector.dart';
 
