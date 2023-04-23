@@ -7,6 +7,7 @@ import 'package:provider/provider.dart';
 import '../../blocs/product/product_cubit.dart';
 import '../../provider/product_detail_provider.dart';
 import '../../style/custom_selector.dart';
+import '../../style/tap_pay_button.dart';
 
 
 class ProductDetailView extends StatefulWidget {
@@ -216,21 +217,7 @@ class _DetailMainImage extends State<DetailMainImage>
                       Container(
                         alignment: Alignment.center,
                         padding: const EdgeInsets.only(bottom: 8, top: 20),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            
-                          },
-                          style: ElevatedButton.styleFrom(
-                            textStyle: const TextStyle(color: Colors.white),
-                            padding: const EdgeInsets.all(16),
-                            backgroundColor: Colors.grey.shade800, // <-- Button color
-                            shape: RoundedRectangleBorder(
-                              borderRadius: BorderRadius.circular(8.0)),
-                              minimumSize: const Size(250, 60),
-                            ),
-                          child: const Text('加入購物車'),
-                            
-                        ),
+                        child: TapPayButton(),
                       ),
                       LabelTextView(content: product.description),
                       LabelTextView(content: product.note),

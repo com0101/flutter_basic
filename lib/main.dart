@@ -8,7 +8,7 @@ import 'package:go_router/go_router.dart';
 import 'blocs/battery/battery_cubit.dart';
 
 void main() {
-  GoRouter.setUrlPathStrategy(UrlPathStrategy.path); // remove #
+  //GoRouter.setUrlPathStrategy(UrlPathStrategy.path); // remove #
   setup();
   runApp(const MyApp());
 }
