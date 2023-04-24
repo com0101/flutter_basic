@@ -1,6 +1,6 @@
 
 import 'package:bloc/bloc.dart';
-import 'package:flutter_stylish/blocs/battery/battery_state';
+import 'package:flutter_stylish/blocs/battery/battery_state.dart';
 import 'package:flutter_stylish/repository/product_repo.dart';
 
 import '../../di/service_locator.dart';

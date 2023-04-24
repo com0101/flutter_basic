@@ -49,6 +49,16 @@ class ProductCubit extends Cubit<ProductState> {
     }
   }
 
+  void checkoutProduct() async {
+    emit(ProductLoadingState());
+    try {
+      final message = await _productRepository.checkoutProduct();
+      emit(PaymentSuccessState(message));
+    } catch (e) {
+      emit(ProductErrorState(e.toString()));
+    }
+  }
+
   @override
   void onChange(Change<ProductState> change) {
     print(change);

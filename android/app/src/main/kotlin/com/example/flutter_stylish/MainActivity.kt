@@ -6,12 +6,15 @@ import android.content.Intent
 import android.content.IntentFilter
 import android.os.BatteryManager
 import android.os.Build
+import android.util.Log
+import com.example.test_tappay.PrimeDialog
 import io.flutter.embedding.android.FlutterActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
 class MainActivity: FlutterActivity() {
     private val CHANNEL = "mediumExplain/battery"
+    private val CHANNEL_2 = "tap_pay"
 
     override fun configureFlutterEngine(flutterEngine: FlutterEngine) {
         super.configureFlutterEngine(flutterEngine)
@@ -28,6 +31,33 @@ class MainActivity: FlutterActivity() {
                 result.notImplemented()
             }
         }
+
+        MethodChannel(flutterEngine.dartExecutor.binaryMessenger, CHANNEL_2)
+            .setMethodCallHandler { call, result ->
+                if (call.method == "checkoutProduct") {
+                    Log.d("test", "i got u ^.<")
+
+                    val dialog = PrimeDialog(context, object : PrimeDialog.PrimeDialogListener {
+                        override fun onSuccess(prime: String) {
+                            Log.d("test", "onSuccess, prime=$prime")
+                            result.success(prime)
+                        }
+
+                        override fun onFailure(error: String) {
+                            Log.d("test", "onFailure, error=$error")
+                            result.success(error)
+                        }
+
+                    })
+
+                    dialog.show()
+
+                } else {
+                    Log.d("test", "u know nothing ${call.method}")
+
+                    result.error("404", "404", null)
+                }
+            }
     }
 
     private fun getBatteryLevel(): Int {

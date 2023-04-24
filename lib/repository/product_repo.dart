@@ -69,4 +69,14 @@ class ProductRepository {
       return "Failed to get battery level: '${e.message}'.";
     }
   }
+
+  Future<String> checkoutProduct() async {
+    const platform = MethodChannel('tap_pay');
+    try {
+      final String result = await platform.invokeMethod('checkoutProduct');
+      return result;
+    } on PlatformException catch (e) {
+      return "Payment failed: '${e.message}'.";
+    }
+  }
 }
